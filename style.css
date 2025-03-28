@@ -1,0 +1,163 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* 设置整个页面为黑色 */
+  height: 100%;
+}
+
+
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px; /* 设置 UI 和 canvas 之间的间距 */
+  margin-bottom: 40px; /* UI 离顶部距离 */
+  background-color: #000; /* 防止容器不够高导致漏白 */
+}
+
+ccanvas {
+  /* 🚫 移除描边和投影 */
+  border: none;
+  box-shadow: none;
+
+  width: min(90vmin, 90vmax);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: block;
+  box-sizing: border-box;
+}
+
+
+#game-ui {
+  text-align: center;
+  color: white;
+  font-family: 'Courier New', monospace;
+  z-index: 10;
+
+  margin-top: 40px;   /* 🔺控制整个UI区域距离画布的距离 */
+}
+
+#game-ui p {
+  margin: 20px 0;      /* 🔻控制每行文字之间的间距 */
+}
+
+#game-ui.hidden {
+  display: none;
+}
+
+
+#time {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.6);
+}
+
+.unit {
+  font-size: 30px;
+  vertical-align: top; /* 或 middle，看你想让它对齐在上还是中间 */
+  margin-left: 2px;
+  opacity: 0.8;
+}
+
+
+#status {
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+#status, #timer {
+  transition: all 0.3s ease;
+}
+
+#start-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('assets/start_bg.png'); /* 你的背景图路径 */
+  background-size: cover;     /* 让背景图铺满 */
+  background-position: center center; /* 居中显示 */
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5; /* 保证它在上层 */
+  transition: opacity 1s ease;
+  opacity: 1; 
+}
+
+#start-screen.hidden {
+  animation: hideStartScreen 2s ease forwards; /* 让动画持续2秒 */
+  pointer-events: none; /* 禁止点击 */
+}
+
+#start-button {
+  position: relative;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+#start-button img {
+  display: block;
+  width: 555px; /* 图片的尺寸来写 */
+  height: auto;
+}
+
+#start-button .btn-text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 255, 255);
+  font-size: 40px; /* 按比例缩小 */
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  text-shadow: 2px 2px 20px rgb(91, 34, 34);
+  pointer-events: none; /* 文字不阻挡按钮点击 */
+  transition: transform 0.3s ease;
+}
+
+/* 悬停时整个按钮放大，文字一起变大 */
+#start-button:hover {
+  transform: scale(1.5);
+}
+
+#start-button:hover .btn-text {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+@keyframes hideStartScreen {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+
+.floating-text {
+  position: absolute;
+  z-index: 10;
+  font-size: 20px;
+  font-weight: bold;
+  color: yellow;
+  transition: opacity 0.1s linear; /* 调整消失的时间和缓动效果 */
+  pointer-events: none;
+}
