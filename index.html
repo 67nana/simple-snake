@@ -29,6 +29,30 @@
     canvas {
       margin-top: 1rem;
     }
+    #start-screen {
+      margin-top: 2rem;
+    }
+    #game-log {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      width: 200px;
+      text-align: left;
+      font-size: 14px;
+      color: white;
+    }
+    #start-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 2rem;
+    }
+    #start-button img {
+      width: 555px;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -37,25 +61,47 @@
     <p class="description">使用 HTML + CSS + JavaScript 实现｜方向键控制｜吃苹果加分 🐍🍎</p>
   </header>
 
-  <div class="game-wrapper">
-    <div id="game-ui" class="hidden">
-      <p id="status">⏳ bro生命的倒计时开始噜…</p>
-      <p id="timer">⏳ 剩余时间：<span id="time">60</span><span class="unit">s</span></p>
-      <p id="score">🍏 当前得分：<span id="score-value">0</span></p>
-    </div>          
-    <canvas id="gameCanvas" width="600" height="600"></canvas>
-  </div>        
+  <div class="game-wrapper" style="display: flex; justify-content: center; gap: 20px;">
+    <div>
+      <div id="game-ui">
+        <p id="status">⏳ bro生命的倒计时开始噜…</p>
+        <p id="timer">⏳ 剩余时间：<span id="time">60</span>s</p>
+        <p id="score">🍏 当前得分：<span id="score-value">0</span></p>
+      </div>
+      <canvas id="gameCanvas" width="600" height="600"></canvas>
+    </div>
+  
+    <!-- HUD 日志区域 -->
+    <div id="game-log" style="width: 200px; text-align: left; font-size: 14px;"></div>
+  </div>
+  
 
-  <!-- 开始按钮 -->
+  <!-- 游戏日志面板 -->
+  <div id="game-log"></div>
+
+  <!-- 开始按钮区域 -->
   <div id="start-screen">
-    <button id="start-button" onclick="startGame()">
+    <button id="start-button">
       <img src="assets/start_button.png" alt="开始游戏" />
-      <span class="btn-text">bro出生</span>
-    </button>            
+      <div class="btn-text">bro出生</div>
+    </button>
   </div>
 
   <div id="floating-texts-container"></div>
 
+  <!-- 脚本必须先加载逻辑，再加载界面 -->
+  <script src="logic.js"></script>
   <script src="snake.js"></script>
+
+  <!-- 按钮绑定逻辑 -->
+  <script>
+    document.getElementById('start-button').addEventListener('click', () => {
+      if (typeof startGame === 'function') {
+        startGame();
+      } else {
+        alert('⚠️ 游戏主逻辑未加载成功，请检查 snake.js 是否正常');
+      }
+    });
+  </script>
 </body>
 </html>

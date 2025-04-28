@@ -1,0 +1,28 @@
+# 忽略 macOS 系统文件
+.DS_Store
+.CFUserTextEncoding
+
+# 终端历史 / 配置
+.python_history
+.zprofile
+.zsh_history
+.lesshst
+
+# 缓存 / 日志
+*.log
+*.pysave
+md5
+.bytertc/
+*.monitor/*
+
+# 临时文件
+*.tmp
+*.swp
+*.swo
+*.bak
+
+# 前端依赖
+node_modules/
+
+# Adobe 相关缓存
+~/.adobe/
